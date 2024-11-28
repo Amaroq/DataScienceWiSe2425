@@ -1,0 +1,106 @@
+\input{../praeambel.tex}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newcommand{\nr}{3}
+\title{Data Science Assignment \nr}
+\author{Nike Marie Pulow -- Henri Paul Heyden \\ \small stu239549 -- stu240825}
+\date{}
+
+\begin{document}
+    \maketitle
+    \section{Linear Regression}
+        \subsection{Regression parameter calculation}
+        We get:
+            \begin{IEEEeqnarray*}{r'c'l'c'l}
+                \hat{\beta} & = & (X^TX)^{-1} X^Ty \\
+                & = & \left(\begin{bmatrix}
+                                1 & 1 & 1 & 1 \\
+                                2 & 8 & 6 & 4 \\
+                            \end{bmatrix} \cdot
+                            \begin{bmatrix}
+                                1 & 2 \\
+                                1 & 8 \\
+                                1 & 6 \\
+                                1 & 4
+                            \end{bmatrix}
+                    \right)^{-1} & \cdot &
+                      \left(\begin{bmatrix}
+                                1 & 1 & 1 & 1 \\
+                                2 & 8 & 6 & 4 \\
+                            \end{bmatrix} \cdot
+                            \begin{bmatrix}
+                                8 \\
+                                2 \\
+                                2 \\
+                                4
+                            \end{bmatrix}\right)\\
+                & = &       \begin{bmatrix}
+                                4 & 20 \\
+                                20 & 120
+                            \end{bmatrix}^{-1} & \cdot &
+                            \begin{bmatrix}
+                                16 \\
+                                60
+                            \end{bmatrix} \\
+                & = &
+                            \begin{bmatrix}
+                                1.5 & -0.25 \\
+                                -0.25 & 0.05
+                            \end{bmatrix} & \cdot &
+                            \begin{bmatrix}
+                                16 \\
+                                60
+                            \end{bmatrix} \\
+                & = &       \begin{bmatrix}
+                                9 \\
+                                -1
+                            \end{bmatrix}
+            \end{IEEEeqnarray*}
+        \subsection{Error evaluation}
+            For the individual errors \(\varepsilon\), we know \(y = X\hat\beta + \varepsilon\), we conclude \(\varepsilon = y - X\hat\beta\) and get values:
+                \[\varepsilon =
+                    \begin{bmatrix}
+                        8 - 9 + 2 \\
+                        2 - 9 + 8 \\
+                        2 - 9 + 6 \\
+                        4 - 9 + 4
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        1 \\
+                        1 \\
+                        -1 \\
+                        -1
+                    \end{bmatrix}
+                \]
+            As we know that the SSE is \(\sum_{i=1}^n(\beta \cdot x_i - y_i)^2\), we can also write \(\sum_{i=1}^{n}{\varepsilon_i}^2\) which is \(4\).
+        \subsection{Plot}
+            \begin{center}
+                \scalebox{0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines = left,
+                        xlabel = \(x\),
+                        ylabel = {\(y\)},
+                    ]
+                    % Fit
+                    \addplot[
+                        domain=0:10, 
+                        samples=100, 
+                        color=red,
+                    ]
+                    {9 - 1*x};
+                    \addlegendentry{Fit with \(y = - x + 9\)}
+                    \addplot[
+                        only marks,
+                    ] coordinates {
+                        (2,8)(8,2)(6,2)(4,4)
+                    };
+                    \addlegendentry{Data}
+                    \end{axis}
+                \end{tikzpicture}
+                }
+            \end{center}
+\end{document}
