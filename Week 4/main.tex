@@ -1,0 +1,33 @@
+\input{../praeambel.tex}
+
+\newcommand{\nr}{4}
+\title{Data Science Assignment \nr}
+\author{Nike Marie Pulow -- Henri Paul Heyden \\ \small stu239549 -- stu240825}
+\date{}
+
+\begin{document}
+    \maketitle
+    \section{PCA, SVD}
+    \begin{itemize}
+        \item[1.]
+            We search for matrices \(U, \Sigma, V\) with \(X = U \Sigma V^T\) so that the columns of \(U\) and \(V\) are eigenvectors of \(XX^T\) and \(X^TX\) respectively. \\
+            We'll begin by computing \(U\): \\
+            \begin{IEEEeqnarray*}{r'c'l}
+                XX^T & = & \begin{bmatrix}
+                                4 & 2 \\
+                                \sqrt 2 & 2 \sqrt 2 \\
+                                -\sqrt 2 & -2 \sqrt 2
+                           \end{bmatrix} \times
+                           \begin{bmatrix}
+                                4 & \sqrt 2 & -\sqrt 2 \\
+                                2 & 2 \sqrt 2 & -2 \sqrt 2
+                           \end{bmatrix} \\
+                    & = & \begin{bmatrix}
+                                20 & 8 \sqrt 2 & -8 \sqrt 2 \\
+                                8 \sqrt 2 & 10 & -10 \\
+                                -8 \sqrt 2 & -10 & 10
+                          \end{bmatrix}
+            \end{IEEEeqnarray*}
+        \item[2.]
+    \end{itemize}
+\end{document}
