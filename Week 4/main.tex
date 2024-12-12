@@ -30,4 +30,49 @@
             \end{IEEEeqnarray*}
         \item[2.]
     \end{itemize}
+
+    \section{TF-IDF}
+    \begin{itemize}
+        \item[1.] Vocabulary: ["fast", "car", "highway", "road", "bike", "wheel"]\\
+        \item[2.] term frequencies:\\
+        \begin{tabular}{c | c c c c}
+            \(t\) & \(d = 1\) & \(d = 2\) & \(d = 3\) & \( d = 4\)\\
+            \hline
+            fast & \(0.2\) & \(0.4\) & \(0.2\) & \(0\) \\
+            car & \( 0.4\) & \(0.4\) & \(0\) & \( 0.25\) \\
+            highway & \(0.2\) & \(0\) & \(0.2\) & \(0\) \\
+            road & \(0.2\) & \(0\) & \(0.4\) & \(0\) \\
+            bike & \(0\) & \(0.2\) & \(0\) & \(0.25\) \\
+            wheel & \(0\) & \(0\) & \(0.2\) & \(0.5\)
+        \end{tabular}\\\\
+        \item[3.] document frequency:\\
+        \begin{tabular}{c | c | c}
+            \(t\) & \(\#d\) containing \(t\) & IDF \\
+            \hline
+            fast & \(3\) & \(\log{\frac{4}{3}}\) \\
+            car & \(3\) & \(\log{\frac{4}{3}}\) \\
+            highway & \(2\) & \(\log{\frac{4}{2}} = \log{2}\) \\
+            road & \(2\) & \(\log(2)\) \\
+            bike & \(2\) & \(\log(2)\) \\
+            wheel & \(2\) & \(\log(2)\)
+        \end{tabular}\\\\
+        \item[4.] calculating TF-IDF vectors:\\
+        \begin{tabular}{c | c c c c}
+            \(t\) & \(d = 1\) & \(d = 2\) & \(d = 3\) & \( d = 4\)\\
+            \hline
+            fast & \(0.025\) & \(0.05\) & \(0.025\) & \(0\) \\
+            car & \(0.05\) & \(0.05\) & \(0\) & \(0.031\) \\
+            highway & \(0.06\) & \(0\) & \(0.06\) & \(0\) \\
+            road & \(0.06\) & \(0\) & \(0.120\) & \(0\) \\
+            bike & \(0\) & \(0.06\) & \(0\) & \(0.075\) \\
+            wheel & \(0\) & \(0\) & \(0.06\) & \(0.151\)
+        \end{tabular}\\\\
+        Which gives us the following vectors for each \(d\):\\
+        \begin{flalign*}
+            r(d=1) & = (0.025, 0.05, 0.06, 0.06, 0, 0) & \text{ }\\
+            r(d=2) & = (0.05, 0.05, 0, 0, 0.06, 0) & \text{ }\\
+            r(d=3) & = (0.025, 0, 0.06, 0.12, 0, 0.06) & \text{ }\\
+            r(d=4) & = (0, 0.031, 0 0, 0.075, 0.151) & \text{ }\\
+        \end{flalign*}
+    \end{itemize}
 \end{document}
