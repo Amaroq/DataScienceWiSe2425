@@ -11,7 +11,7 @@
     \begin{itemize}
         \item[1.]
             We search for matrices \(U, \Sigma, V\) with \(X = U \Sigma V^T\) so that the columns of \(U\) and \(V\) are eigenvectors of \(XX^T\) and \(X^TX\) respectively. \\
-            We'll begin by computing \(U\): \\
+            We'll begin by computing \(XX^T\): \\
             \begin{IEEEeqnarray*}{r'c'l}
                 XX^T & = & \begin{bmatrix}
                                 4 & 2 \\
@@ -28,6 +28,196 @@
                                 -8 \sqrt 2 & -10 & 10
                           \end{bmatrix}
             \end{IEEEeqnarray*}
+            Now we have to solve \(\det(X - \lambda I_{3 \times 3}) = 0\) for the eigenvalues of \(XX^T\). \\
+            An expanded form of this equation is:
+            \begin{IEEEeqnarray*}{r'c'l}
+                0 & = & \det(X - \lambda I_{3 \times 3}) \\
+                  & = & \det\left(
+                            \begin{bmatrix}
+                                20 & 8 \sqrt 2 & -8 \sqrt 2 \\
+                                8 \sqrt 2 & 10 & -10 \\
+                                -8 \sqrt 2 & -10 & 10
+                            \end{bmatrix} -
+                            \begin{bmatrix}
+                                \lambda & 0 & 0 \\
+                                0 & \lambda & 0 \\
+                                0 & 0 & \lambda
+                            \end{bmatrix}
+                            \right) \\
+                  & = & \det\left(
+                            \begin{bmatrix}
+                                20 - \lambda & 8 \sqrt 2 & -8 \sqrt 2 \\
+                                8 \sqrt 2 & 10 - \lambda & -10 \\
+                                -8 \sqrt 2 & -10 & 10 - \lambda
+                            \end{bmatrix}
+                            \right) \\
+                  & = & (20 - \lambda)(10 - \lambda)(10 - \lambda) + (8 \sqrt 2)(-10)(-8 \sqrt 2) + (-8 \sqrt 2)(8 \sqrt 2)(-10) \\
+                    & & - (-8 \sqrt 2)(10 - \lambda)(-8 \sqrt 2) - (8 \sqrt 2)(8 \sqrt 2)(10 - \lambda) - (20 - \lambda)(-10)(-10)
+            \end{IEEEeqnarray*}
+            This is a third degree polynomial equation with expanded form \(-x^3 + 40x^2 - 144x = 0\) \footnote{Actually writing each step of this down would take too much space.} \\
+            We get the solutions: \[\lambda_1 = 36 \wedge \lambda_2 = 4 \wedge \lambda_3 = 0\]
+            With this we have \[\Sigma = \begin{bmatrix}
+                                            6 & 0 & 0 \\
+                                            0 & 2 & 0 \\
+                                            0 & 0 & 0
+                                          \end{bmatrix}\]
+            With the eigenvalues of \(XX^T\) being calculated, we can now solve for the eigenvectors of \(XX^T\):
+            \begin{IEEEeqnarray*}{r'c'l}
+                \begin{bmatrix}
+                    0 \\
+                    0 \\
+                    0
+                \end{bmatrix}
+                & = &
+                \left(
+                \begin{bmatrix}
+                    20 & 8 \sqrt 2 & -8 \sqrt 2 \\
+                    8 \sqrt 2 & 10 & -10 \\
+                    -8 \sqrt 2 & -10 & 10
+                \end{bmatrix}
+                -
+                \begin{bmatrix}
+                36 & 0 & 0 \\
+                0 & 36 & 0 \\
+                0 & 0 & 36
+                \end{bmatrix}
+                \right)
+                \times
+                \begin{bmatrix}
+                    {v_1}_1 \\
+                    {v_1}_2 \\
+                    {v_1}_3
+                \end{bmatrix} \\
+                & = &
+                \begin{bmatrix}
+                    -16 & 8 \sqrt 2 & -8 \sqrt 2 \\
+                    8 \sqrt 2 & -26 & -10 \\
+                    -8 \sqrt 2 & -10 & -26
+                \end{bmatrix}
+                \times
+                \begin{bmatrix}
+                    {v_1}_1 \\
+                    {v_1}_2 \\
+                    {v_1}_3
+                \end{bmatrix} \\
+                & = &
+                \begin{bmatrix}
+                    -16 {v_1}_1 + 8 \sqrt 2 {v_1}_2 - 8 \sqrt 2 {v_1}_3 \\
+                    8 \sqrt 2 {v_1}_1 - 26 {v_1}_2 - 10{v_1}_3 \\
+                    -8 \sqrt 2 {v_1}_1 - 10 {v_1}_2 - 26 {v_1}_3
+                \end{bmatrix}
+            \end{IEEEeqnarray*}
+            When numbering the equations in collumns \textbf{I}, \textbf{II} and \textbf{III} we can see that \(\textbf{I} \Rightarrow {v_1}_1 = \frac{\sqrt 2 {v_1}_2}{2} - \frac{\sqrt 2 {v_1}_3}{2}\) and \\
+            \(\textbf{II} + \textbf{III} \Rightarrow {v_1}_2 = -{v_1}_3\) which results in:
+            \[{v_1}_1 = \sqrt 2 {v_1}_2\] and respectively:
+            \[{v_1}_2 = \frac{{v_1}_1}{\sqrt 2} \wedge {v_1}_3 = -\frac{{v_1}_1}{\sqrt 2}\]
+            There are infinite solutions for this, with one being: \[{v_1}_1 = 1 \wedge {v_1}_2 = \sqrt 2^{-1} \wedge {v_1}_3 = -\sqrt 2^{-1}\]
+            So we get one eigenvector:
+            \[v_1 = \begin{bmatrix}
+                1 \\
+                \sqrt 2^{-1} \\
+                -\sqrt 2^{-1}
+            \end{bmatrix}\]
+            Because writing the processes down takes a lot of space, the following linear equation systems will not be solved, but solutions provided. We have already demonstrated that we can solve one and the probability of minor mistakes when writing it down ruining the whole task is too great. \\
+            The second eigenvector we get by this time subtracting the diagonal matrix times \(4\) instead of \(36\) and we get a solution:
+            \[v_2 = \begin{bmatrix}
+               1 \\
+               -\sqrt 2^{-1} \\
+               \sqrt 2^{-1}
+            \end{bmatrix}\]
+            And the third eigenvector is quite trivial:
+            \[v_3 = \begin{bmatrix}
+               0 \\
+               1 \\
+               1
+            \end{bmatrix}\]
+            Something that wasn't specified in the slides was that the eigenvectors must be normalized so that \(U\) and \(V\) are orthonormal. \\
+            For that we have to divide all these vectors by \(\sqrt 2\). \\
+            We get:
+            \[U = 
+                \begin{bmatrix}
+                    \sqrt 2^{-1} & \sqrt 2^{-1} & 0 \\
+                    1/2 & -1/2 & \sqrt 2^{-1} \\
+                    -1/2 & 1/2 & \sqrt 2^{-1}
+                \end{bmatrix}
+            \]
+            For a quick verification, we can compute \(UU^T\) and yes we get \(I_{3 \times 3}\), so \(U\) is indeed orthonormal. \\
+            Now to \(V\) \\
+            As the lecture specifies, the eigenvalues of \(XX^T\) are the same like those of \(X^TX\). \\
+            This means we \textquote{just} have to solve the linear equations but for \(X^TX\) and not \(XX^T\). \\
+            We'll begin by computing \(X^TX\): \\
+            \begin{IEEEeqnarray*}{r'c'l}
+                X^TX & = & \begin{bmatrix}
+                                4 & \sqrt 2 & -\sqrt 2 \\
+                                2 & 2 \sqrt 2 & -2 \sqrt 2
+                           \end{bmatrix} \times
+                           \begin{bmatrix}
+                                4 & 2 \\
+                                \sqrt 2 & 2 \sqrt 2 \\
+                                -\sqrt 2 & -2 \sqrt 2
+                           \end{bmatrix}\\
+                    & = & \begin{bmatrix}
+                                20 & 16 \\
+                                16 & 20
+                          \end{bmatrix}
+            \end{IEEEeqnarray*}
+            Thank god that this time it's small and regular. \\
+            We get the following systems of linear equations:
+            With eigenvalue \(36\) we get:
+            \begin{IEEEeqnarray*}{r'c'l}
+                \begin{bmatrix}
+                    0 \\
+                    0 \\
+                    0
+                \end{bmatrix}
+                & = &
+                \begin{bmatrix}
+                    -16 & 16 \\
+                    16 & -16
+                \end{bmatrix} \times
+                \begin{bmatrix}
+                    {v_1}_1 \\
+                    {v_1}_2
+                \end{bmatrix} \\
+                & = &
+                \begin{bmatrix}
+                    16 {v_1}_1 - 16 {v_1}_2 \\
+                    16 {v_1}_1 - 16 {v_1}_2 \\
+                \end{bmatrix}
+            \end{IEEEeqnarray*}
+            With one solution being: \[v_1 = \begin{bmatrix} \sqrt 2^{-1} \\ \sqrt 2^{-1} \end{bmatrix}\]
+            With eigenvalue \(4\) we get:
+            \begin{IEEEeqnarray*}{r'c'l}
+                \begin{bmatrix}
+                    0 \\
+                    0 \\
+                    0
+                \end{bmatrix}
+                & = &
+                \begin{bmatrix}
+                    16 & 16 \\
+                    16 & 16
+                \end{bmatrix} \times
+                \begin{bmatrix}
+                    {v_2}_1 \\
+                    {v_2}_2
+                \end{bmatrix} \\
+                & = &
+                \begin{bmatrix}
+                    16 {v_2}_1 + 16 {v_2}_2 \\
+                    16 {v_2}_1 + 16 {v_2}_2 \\
+                \end{bmatrix}
+            \end{IEEEeqnarray*}
+            With one solution being \[v_2 = \begin{bmatrix} \sqrt 2^{-1} \\ -\sqrt 2^{-1} \end{bmatrix}\]
+            For the last eigenvalue \(0\) we get \(v_3 = \begin{bmatrix} 0 \\ 0 \end{bmatrix}\), which formally isn't an eigenvector, since it would be an eigenvector of every matrix, but it is the only solution to the corresponding eigenvalue. \\
+            With that we get: 
+            \[V^T = \begin{bmatrix}
+                \sqrt 2^{-1} & \sqrt 2^{-1} \\
+                \sqrt 2^{-1} & -\sqrt 2^{-1} \\
+                0 & 0
+            \end{bmatrix}\]
+            And now we can calculate the product \(U\Sigma V^T\) to verify that it is actually right, which I did, but to be honest, writing all that down with each addition and so on would take a lot of time.
         \item[2.]
+            TODO
     \end{itemize}
 \end{document}
