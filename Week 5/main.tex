@@ -1,5 +1,7 @@
 \input{../praeambel.tex}
 
+\usepackage{booktabs}
+
 \newcommand{\nr}{5}
 \title{Data Science Assignment \nr}
 \author{Nike Marie Pulow -- Henri Paul Heyden \\ \small stu239549 -- stu240825}
@@ -17,4 +19,58 @@
         \includegraphics[scale=0.5]{./A1 figs/iter6.png}
         \includegraphics[scale=0.5]{./A1 figs/iter7.png}
     \end{center}
+\pagebreak
+    \section{\(k\)NN-Index-APL}
+    \textbf{1:} \(q=(9,9)\), \(k=3\)\\
+    \begin{tabular}{l | l | l | l}
+        Iteration   & APL               & \textit{result}                                               & \textit{pruningdist} \\
+        \toprule
+        1.          & [(0,R1), (0,R2)]   & [(\(\infty, null\)), (\(\infty, null\)), (\(\infty, null\))]  & \(\infty\) \\
+        2.          & [(0,R2), (0,A), (0,B)] & [(\(\infty, null\)), (\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        3.          & [(0,A), (0,B), (4,R21), (4,R22)] & [(\(\infty, null\)), (\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        4.          & [(0,B), (4,R21), (4,R22)] & [(3,A), (\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        5.          & [(4,R21), (4,R22)] & [(3,A), (13,B), (\(\infty, null\))] & \(\infty\) \\
+        6.          & [(4,R22), (6,C), (6,D)] & [(3,A), (13,B), (\(\infty, null\))] & \(\infty\) \\
+        7.          & [(4,E), (4,F), (6,C), (6,C)] & [(3,A), (13,B), (\(\infty, null\))] & \(\infty\) \\
+        8.          & [(4,F), (6,C), (6,D)] & [(3,A), (6,E), (13,B)] & \(13\) \\
+        9.          & [(6,C), (6,D)] & [(3,A), (6,E), (6,F)] & \(6\) \\
+        10.         & [(6,D)] & [(3,A), (6,E), (6,F)] & \(6\) \\
+        11.         & [] & [(3,A), (6,E), (6,F)] & \(6\) \\
+
+    \end{tabular}
+    \\
+    \\
+    \textbf{2:} \(q=(4,6)\), \(k=2\)\\
+    \begin{tabular}{l|l|l|l}
+        Iteration   & APL               & \textit{result}                                               & \textit{pruningdist} \\
+        \toprule
+        1. & [(0,R1), (0,R2)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        2. & [(0,R2), (2,A), (2,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        3. & [(1,R21), (1,R22), (2,A), (2,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        4. & [(1,R22), (2,A), (2,B), (4,C), (4,D)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        5. & [(2,A), (2,B), (2,E), (2,F), (4,C), (4,D)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        6. & [(2,B), (2,E), (2,F), (4,C), (4,D)] & [(6,A), (\(\infty, null\))] & \(\infty\) \\
+        7. & [(2,E), (2,F), (4,C), (4,D)] & [(6,A), (14,B)] & \(14\) \\
+        8. & [(2,F), (4,C), (4,D)] & [(2,E), (6,A)] & \(6\) \\
+        9. & [(4,C), (4,D)] & [(2,E), (2,F)] & \(2\) \\
+    \end{tabular}
+    \\
+    \\
+    \textbf{3:} \(q=(7,5)\), \(k=2\)\\
+    \begin{tabular}{l|l|l|l}
+        Iteration   & APL               & \textit{result}                                               & \textit{pruningdist} \\
+        \toprule
+        1. & [(0,R1), (0,R2)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        2. & [(0,R2), (3,A), (3,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        3. & [(0,R21), (0,R22), (3,A), (3,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        4. & [(0,R22), (2,C), (2,D), (3,A), (3,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        5. & [(0,E), (0,F), (2,C), (2,D), (3,A), (3,B)] & [(\(\infty, null\)), (\(\infty, null\))] & \(\infty\) \\
+        6. & [(0,F), (2,C), (2,D), (3,A), (3,B)] & [(2,E), (\(\infty, null\))] & \(\infty\) \\
+        7. & [(2,C), (2,D), (3,A), (3,B)] & [(2,E), (2,F)] & 2 \\
+        8. & [(2,D), (3,A), (3,B)] &  [(2,E), (2,F)] & 2 \\
+        9. & [(3,A), (3,B)] & [(2,E), (2,F)] & 2 \\
+    \end{tabular}
+    \\
+    \\
+    \textbf{4: } TODO
 \end{document}
